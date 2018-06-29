@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Produtos</title>
+
+<link rel="stylesheet" type="text/css" href="/css/estilo.css" />
+
+
+<style>
+.central{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 3vh;
+}
+.btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Green */
+.success {
+  border-color: #4CAF50;
+  color: green;
+}
+
+.success:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Blue */
+.info {
+  border-color: #2196F3;
+  color: dodgerblue
+}
+
+.info:hover {
+  background: #2196F3;
+  color: white;
+}
+
+/* Orange */
+.warning {
+  border-color: #ff9800;
+  color: orange;
+}
+
+.warning:hover {
+  background: #ff9800;
+  color: white;
+}
+
+/* Red */
+.danger {
+  border-color: #f44336;
+  color: red
+}
+
+.danger:hover {
+  background: #f44336;
+  color: white;
+}
+
+/* Gray */
+.default {
+  border-color: #e7e7e7;
+  color: black;
+}
+
+.default:hover {
+  background: #e7e7e7;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color:#f5f5f5;}
+
+img{
+width:10%;
+}
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: right;
+  font-family:Palatino Linotype;
+  color: #e8e8e8;
+  background-color: #333;
+  font-size:1vw
+  width: 100%; /* The width is 60%, by default */
+}
+
+</style>
+</head>
+<body>
+
+<!---Nav----->
+<ul id='nav'>
+  <li><a href="/inicio">Inicio</a></li>
+  <li><a th:href="@{/produto/galeria}">Nossos Tomperos</a></li>
+  
+  <li style="float:right"><a class="active" sec:authorize="hasRole('ADMIN')" th:href="@{/gerencia}">Gerenciar</a></li>
+  <li style="float:right"><a sec:authorize="hasRole('USER')" th:href="@{/carrinho}">Carrinho</a></li>
+  <li style="float:right"><a sec:authorize="!isAuthenticated()" th:href="@{/usuario/logar}">Login</a></li>
+  <li style="float:right"><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>
+
+</ul>
+<!---fim Nav----->
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Codigo</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Preço</th>
+      <th scope="col">Foto</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="produto: ${todosOsProdutos}">
+      <td th:text="${produto.id}"></td>
+      <td th:text="${produto.nome}"></td>
+      <td th:text="${produto.preco}"></td>
+      <td> <img alt="" th:src="@{'/images/'+${produto.nome}+.png}"/> </td>
+      <td> <a th:href="@{/produto/excluir/{id}(id = ${produto.id})}"> <button type="button" class="btn danger">Excluir</button> </a> </td>
+      <td> <a th:href="@{/produto/atualizar/{id}(id = ${produto.id})}"> <button type="button" class="btn info">Atualizar</button>  </a> </td>
+    </tr>
+    <tr>      
+  </tbody>
+  
+</table>
+
+<div class="central">
+<button class="btn default" ><a href="formulario">Cadastrar Mais um Produto</button></a>
+</div>
+
+<!-- FOOT -->
+<div class="footer">
+  <footer>
+    Telefone: (88) 99966-7788
+    <br>
+    Fundação: 04/01/2001
+    <br>
+    Desing site: Marcello Alexandre
+    <br>
+  </footer>
+</div>
+
+<!-- FOOT -->
+
+<script src="/js/bootstrap.min.js">  </script>
+
+</body>
+</html>

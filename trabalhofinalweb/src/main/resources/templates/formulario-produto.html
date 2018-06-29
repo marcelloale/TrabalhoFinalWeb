@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Formulario Produto</title>
+
+<link rel="stylesheet" type="text/css" href="/css/estilo.css" />
+ 
+<style>
+* {
+    box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+input[type=password], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+
+
+button[type=submit] {
+    background-color: #2b669a;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+button[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    margin-top: 3%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+
+.central{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 3vh;
+}
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: right;
+  font-family:Palatino Linotype;
+  color: #e8e8e8;
+  background-color: #333;
+  font-size:1vw
+  width: 100%; /* The width is 60%, by default */
+}
+
+</style>
+</head>
+<body>
+
+
+<!---Nav----->
+<ul id='nav'>
+  <li><a  href="/inicio">Inicio</a></li>
+  <li><a th:href="@{produto/galeria}">Nossos Tomperos</a></li>
+  
+  <li style="float:right"><a class="active" sec:authorize="hasRole('ADMIN')" th:href="@{/gerencia}">Gerenciar</a></li>
+  <li style="float:right"><a sec:authorize="hasRole('USER')" th:href="@{/carrinho}">Carrinho</a></li>
+  <li style="float:right"><a sec:authorize="!isAuthenticated()" th:href="@{/usuario/logar}">Login</a></li>
+  <li style="float:right"><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>
+
+</ul>
+<!---fim Nav----->
+
+<div class="container">
+
+	<form method="POST" action="/produto/salvar" enctype="multipart/form-data" th:object="${produto}">
+	<input type="hidden" th:field="*{id}"> 
+	  <div class="row">
+	  	<div class="col-25">
+	    <label for="nomeProd">Nome Produto:</label>
+	    </div>
+	    <div class="col-75">
+	    <input type="text" id="nomeProd" th:field="*{nome}">
+	    </div>
+	  </div>
+	  
+	  <div class="row">
+	  	<div class="col-25">
+	    <label for="preco">Preço:</label>
+	    </div>
+	    <div class="col-75">
+	    <input type="text"  id="preco" th:field="*{preco}">
+	    </div>
+	  </div>
+	  
+	  <div class="row">
+	  	<div class="col-75">
+	  	Selecione Imagem: <input type="file" name="imagem">
+	  	</div>
+	  
+	  </div>
+	  
+  	  <div class="row">
+  	  
+	  <button type="submit" class="btn success">Confirmar</button>
+
+	  </div>
+	</form>
+
+</div>
+
+<script src="/js/bootstrap.min.js">  </script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerencia</title>
+<link rel="stylesheet" type="text/css" href="/css/estilo.css" />
+
+<style>
+
+.central{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 3vh;
+}
+.btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Green */
+.success {
+  border-color: #4CAF50;
+  color: green;
+}
+
+.success:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Blue */
+.info {
+  border-color: #2196F3;
+  color: dodgerblue
+}
+
+.info:hover {
+  background: #2196F3;
+  color: white;
+}
+
+/* Orange */
+.warning {
+  border-color: #ff9800;
+  color: orange;
+}
+
+.warning:hover {
+  background: #ff9800;
+  color: white;
+}
+
+/* Red */
+.danger {
+  border-color: #f44336;
+  color: red
+}
+
+.danger:hover {
+  background: #f44336;
+  color: white;
+}
+
+/* Gray */
+.default {
+  border-color: #e7e7e7;
+  color: black;
+}
+
+.default:hover {
+  background: #e7e7e7;
+}
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: right;
+  font-family:Palatino Linotype;
+  color: #e8e8e8;
+  background-color: #333;
+  font-size:1vw
+  width: 100%; /* The width is 60%, by default */
+}
+
+</style>
+
+</head>
+<body>
+
+<!---Nav----->
+<ul id='nav'>
+  <li><a href="/inicio">Inicio</a></li>
+  <li><a th:href="@{produto/galeria}">Nossos Tomperos</a></li>
+  
+  <li style="float:right"><a class="active" sec:authorize="hasRole('ADMIN')" th:href="@{/gerencia}">Gerenciar</a></li>
+  <li style="float:right"><a sec:authorize="hasRole('USER')" th:href="@{/carrinho}">Carrinho</a></li>
+  <li style="float:right"><a sec:authorize="!isAuthenticated()" th:href="@{/usuario/logar}">Login</a></li>
+  <li style="float:right"><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>
+
+</ul>
+<!---fim Nav----->
+
+<h1> Gerencia</h1>
+<br>
+
+<button class="btn default" ><a th:href="@{/produto/formulario}">Cadastrar Produto</button></a>
+<button class="btn default"><a th:href="@{/produto/listar}">Listar Produtos</button></a>
+<button class="btn info" ><a th:href="@{/produto/galeria}">Ver Galeria de Produtos</button></a>
+<button class="btn warning"><a th:href="@{/usuario/formulario}">Cadastrar Usuario</button></a>
+<button class="btn warning"><a th:href="@{/usuario/listar}">Listar Usuarios</button></a>
+
+
+
+<!-- FOOT -->
+<div class="footer">
+  <footer>
+    Telefone: (88) 99966-7788
+    <br>
+    Fundacao: 04/01/2001
+    <br>
+    Desing site: Marcello Alexandre
+    <br>
+  </footer>
+</div>
+
+<!-- FOOT -->
+
+<script src="/js/bootstrap.min.js">  </script>
+
+</body>
+</html>

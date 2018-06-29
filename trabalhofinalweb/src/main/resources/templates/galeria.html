@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="/css/estilo.css" />
+
+<style type="text/css">
+.footer {
+  width: 100%;
+  bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: right;
+  font-family:Palatino Linotype;
+  color: #e8e8e8;
+  background-color: #333;
+  font-size:1vw
+  width: 100%; /* The width is 60%, by default */
+}
+
+.central{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 3vh;
+}
+.btn {
+    border: 2px solid black;
+  	border-radius: 5px;
+    background-color: inherit;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+/* Blue */
+.info {
+    color: dodgerblue;
+}
+
+.info:hover {
+    background: #2196F3;
+    color: white;
+}
+
+/* Orange */
+.warning {
+    color: orange;
+}
+
+.warning:hover {
+    background: #ff9800;
+    color: white;
+}
+
+/* Green */
+.success {
+  border-color: #4CAF50;
+  color: green;
+}
+
+.success:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+img{
+width:100%;
+}
+
+</style>
+  <title>Cozinha do Jacquin</title>
+
+</head>
+<body>
+<!---Nav----->
+<ul id='nav'>
+  <li><a href="/inicio">Inicio</a></li>
+  <li><a class="active" th:href="@{/produto/galeria}">Nossos Tomperos</a></li>
+  
+  <li style="float:right"><a sec:authorize="hasRole('ADMIN')" th:href="@{/gerencia}">Gerenciar</a></li>
+  <li style="float:right"><a sec:authorize="hasRole('USER')" th:href="@{/carrinho}">Carrinho</a></li>
+  <li style="float:right"><a sec:authorize="!isAuthenticated()" th:href="@{/usuario/logar}">Login</a></li>
+  <li style="float:right"><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>
+
+</ul>
+<!---fim Nav----->
+
+
+
+<!----MAIS produtos --->
+
+<div class="galeriap">
+
+<h1>Nossos Produtos</h1>
+<hr>
+
+<div class="row">
+  <div class="column" th:each="produto: ${todosOsProdutos}">
+    <img th:src="@{'/images/'+${produto.nome}+.png}">
+    <h2 th:text="${produto.nome}"></h2>
+    <p>R$ <a th:text="${produto.preco}"></a></p>
+    <button sec:authorize="!isAuthenticated()" href="@{/usuario/logar}" class="btn success" id="comprar">Comprar</button>
+    <button sec:authorize="hasRole('USER')" th:href="@{/carrinho}" class="btn success" id="comprar">Comprar</button>
+  </div>
+
+
+</div>
+</div>
+<!-- fim dos MAIS PRODUTOS--->
+
+
+<!----aqui produtos a mostra--->
+
+<div class="galeriap" id="escondido">
+
+
+<div class="row">
+  <div class="column" th:each="produto: ${todosOsProdutos}">
+    <img th:src="@{'/images/'+${produto.nome}+.png}">
+    <h2 th:text="${produto.nome}"></h2>
+    <p>R$ <a th:text="${produto.preco}"></a></p>
+    <button sec:authorize="!isAuthenticated()" class="btn success" id="comprar"><a th:href="@{/usuario/logar}">Comprar</button></a>
+    <button sec:authorize="hasRole('USER')" th:href="@{/carrinho}" class="btn success" id="comprar">Comprar</button>
+  </div>
+
+
+</div>
+</div>
+<!-- fim dos amostra--->
+<div class="central">
+<button class="btn warning" id="esconder" style="margin-left: auto;margin-right: auto;">Ver Menos</button>
+<button class="btn info" id="mostrar" style="margin-left: auto;margin-right: auto;">Mais Produtos</button>
+</div>
+
+
+<!-- RODAPé--->
+
+<div class="footer">
+  <footer>
+    Telefone: (88) 99966-7788
+    <br>
+    Fundação: 04/01/2001
+    <br>
+    Desing site: Marcello Alexandre
+    <br>
+  </footer>
+</div>
+
+<!--RODAPÈ fim-->
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+  $("#nav").addClass("js").before('<div id="menu">&#9776;</div>');
+  $("#menu").click(function(){
+    $("#nav").toggle();
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $("#nav").removeAttr("style");
+    }
+  });
+</script>
+
+<script src="jquery.js"></script>
+
+    <script>
+
+        $("#escondido").hide();
+        $("#esconder").hide();
+        $(document).ready(function () {
+            $("#mostrar").click(function () {
+                $("#escondido").show();
+                $("#esconder").show();
+                $("#mostrar").hide();
+            });
+            $("#esconder").click(function () {
+                $("#escondido").hide();
+                $("#mostrar").show();
+                $("#esconder").hide();
+                
+                
+            });
+            
+        });
+
+
+
+    </script>
+
+</body>
+</html>

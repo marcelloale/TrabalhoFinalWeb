@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+* {
+    box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+    font-family: Raleway;
+    margin: 0;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #2b669a;
+}
+
+/*==container sobre==*/
+
+.main {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%; /* The width is 60%, by default */
+  font-size:1vw
+}
+
+
+.main<p{
+  font-size:2vw
+}
+
+.center {
+    position: relative;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+}
+
+
+  @media screen and (max-width: 768px) {
+    #menu {
+      width:1.4em;
+      display: block;
+      background:#4CAF50;
+      font-size:1.35em;
+      text-align: center;
+    }
+    #nav.js {
+      display: none;
+    }
+    ul {
+      width:100%;
+    }
+    li {
+      width:100%;
+      border-right:none;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    #menu {
+      display: none;
+    }
+  }
+
+
+.footer {
+  width: 100%;
+  
+  bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: right;
+  font-family:Palatino Linotype;
+  color: #e8e8e8;
+  background-color: #333;
+  font-size:1vw
+  width: 100%; /* //position: absolute; The width is 60%, by default */
+}
+
+</style>
+</head>
+<body>
+
+<!---Nav----->
+<ul id='nav'>
+  <li><a href="inicial.html">Inicio</a></li>
+  <li><a href="galeria.html">Nossos Tomperos</a></li>
+  <li><a href="contato.html">Contato</a></li>
+  <li style="float:right"><a class="active" href="sobre.html">Sobre o Chef</a></li>
+</ul>
+<!---fim Nav----->
+
+<div class="main">  
+    <h3 style="font-size:2vw">Um gênio criativo que alia rigor estético, profundo senso de qualidade e uma personalidade irresistível.</h3><br>
+    <!--<img src="images/logo.jpg"  class="" style="display:block;margin:auto" width=100%>-->
+    <picture>
+    <img class="logo" src="images/logo.gif" alt="logoJacquin" style="width:20%;display: block;
+    margin-left: auto;
+    margin-right: auto">
+    </picture>
+    <div class="center">
+      
+      <p >Reconhecido pela revista Forbes como uma das 25 mais importantes celebridades do país, Erick Jacquin é um dos mais importantes Chefs franceses em atividade no Brasil. Seu talento não está apenas na alquimia revelada em suas criações gastronômicas, mas na sua enorme capacidade de criar experiências únicas. Sua trajetória inspira a superação dos limites e a busca obstinada pela perfeição.</p>
+      <p >Em 1964, em Dun Sur Auron, pequena e tradicional cidade do Departamento de Cher, no centro da França, perto do Vale do Loire, a conhecida região vinícola, também região de castelos onde residiram os reis da França, nascia Erick Jacquin. Ainda jovem, decidiu ir para Paris, onde trabalhou em vários grandes restaurantes franceses e com Henri Charvet - Maître Cuisinier de France -, proprietário do restaurante Au Comte de Gascogne, que lhe confiou a responsabilidade da cozinha. O Au Comte de Gascogne era especializado em foie gras.</p>
+      <p >No Brasil desde 1994, durante quatro anos comendou o Le Coq Hardy e depois, assumiu a cozinha do lendário Café Antiqüe, especializado na mais alta gastronomia francesa. Com 10 anos de Brasil inaugurou a La Brasserie Erick Jacquin. Foi ele quem batizou o petit gâteau, hoje, uma paixão nacional. Além do sucesso como consultor que assina cardápio de importantes casas pelo Brasil, sua carreira tomou novo rumo com o convite para o programa MasterChef, sucesso arrebatador da TV Band e hoje experimenta a popularidade – assediado por onde passa pelo público de todas as faixas etárias e classes sociais.</p>
+    <br>
+    </div>
+  </div>
+  
+
+<!-- RODAPé--->
+
+<div class="footer">
+  <footer>
+    Telefone: (88) 99966-7788
+    <br>
+    Fundação: 04/01/2001
+    <br>
+    Desing: Marcello Alexandre
+    <br>
+  </footer>
+</div>
+
+<!--RODAPÈ fim-->
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+  $("#nav").addClass("js").before('<div id="menu">&#9776;</div>');
+  $("#menu").click(function(){
+    $("#nav").toggle();
+  });
+  $(window).resize(function(){
+    if(window.innerWidth > 768) {
+      $("#nav").removeAttr("style");
+    }
+  });
+</script>
+
+</body>
+</html>
